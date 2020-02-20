@@ -1,0 +1,12 @@
+name: password
+version: 0.1.0
+license: Unlicense
+targets:
+  password-make:
+    main: src/password/commands/make.cr
+  password-get:
+    main: src/password/commands/get.cr
+  password-menu:
+    main: src/password/commands/menu.cr
+  password-edit:
+    main: src/password/commands/edit.cr
