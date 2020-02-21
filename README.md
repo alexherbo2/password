@@ -52,7 +52,7 @@ password-get $(password-menu | fzf) | wl-copy
 Same with [Alacritty]:
 
 ``` sh
-alacritty --command sh -c 'password-get $(password-menu | fzf) | wl-copy'
+alacritty --command sh -c 'password-get $(password-menu | fzf) | nohup wl-copy > /dev/null'
 ```
 
 ## Configuration
