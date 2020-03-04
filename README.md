@@ -13,7 +13,7 @@ Command-line program for managing passwords.
 ## Installation
 
 ``` sh
-make build # Build bin/password-make, bin/password-get, bin/password-menu and bin/password-edit.
+make build # Build bin/password-create, bin/password-get, bin/password-menu and bin/password-edit.
 make install # Install bin into ~/.local/bin.
 ```
 
@@ -34,7 +34,7 @@ master: your-master-password
 Create a password:
 
 ``` sh
-password-make user@github.com
+password-create user@github.com
 ```
 
 Get a password:
@@ -62,8 +62,8 @@ password_menu() {
   password-get $(password-menu | fzf) | wl-copy
 }
 
-alias pw=password_menu
-alias pm=password-make
+alias pm=password_menu
+alias pc=password-create
 alias pg=password-get
 alias pe=password-edit
 ```
