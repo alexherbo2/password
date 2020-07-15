@@ -6,6 +6,25 @@
 
 Command-line program for managing passwords.
 
+## Method
+
+``` crystal
+Crypto::Bcrypt::Password.create("<key>:<password>")
+```
+
+Memorize only one password.
+Use a different password on all website.
+
+**Example**
+
+``` crystal
+Crypto::Bcrypt::Password.create("alexherbo2@github.com:very-strong-password")
+```
+
+See [`Crypto::Bcrypt::Password`] for a complete reference.
+
+[`Crypto::Bcrypt::Password`]: https://crystal-lang.org/api/Crypto/Bcrypt/Password.html
+
 ## Dependencies
 
 - [Crystal]
