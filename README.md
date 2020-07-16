@@ -2,6 +2,8 @@
 
 [![IRC](https://img.shields.io/badge/IRC-%23password-blue)](https://webchat.freenode.net/#password)
 
+<img src="https://github.com/FortAwesome/Font-Awesome/raw/master/svgs/solid/lock.svg" height="16" align="right">
+
 > “One password to rule them all.”
 
 Command-line program for managing passwords.
