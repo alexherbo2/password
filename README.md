@@ -25,6 +25,19 @@ See [`Crypto::Bcrypt::Password`] for a complete reference.
 
 [`Crypto::Bcrypt::Password`]: https://crystal-lang.org/api/Crypto/Bcrypt/Password.html
 
+## Implementation
+
+A simple POSIX shell function:
+
+``` sh
+create_password() {
+  key=$1
+  printf '%s:%s' "$key" "$PASSWORD" | shasum -a 512 | base64
+}
+
+PASSWORD=very-strong-password create_password alexherbo2@github.com
+```
+
 ## Dependencies
 
 - [Crystal]
