@@ -47,8 +47,7 @@ PASSWORD=very-strong-password create_password alexherbo2@github.com
 ## Installation
 
 ``` sh
-make build # Build bin/password-create, bin/password-get, bin/password-menu and bin/password-edit.
-make install # Install bin into ~/.local/bin.
+make install
 ```
 
 ## Usage
@@ -56,7 +55,7 @@ make install # Install bin into ~/.local/bin.
 Add your master password:
 
 ``` sh
-password-edit
+password edit
 ```
 
 `~/.config/passwords.yml`
@@ -68,38 +67,38 @@ master: your-master-password
 Create a password:
 
 ``` sh
-password-create user@github.com
+password create user@github.com
 ```
 
 Get a password:
 
 ``` sh
-password-get user@github.com
+password get user@github.com
 ```
 
 Copy a password with [fzf] and [wl-clipboard]:
 
 ``` sh
-password-get $(password-menu | fzf) | wl-copy
+password get $(password menu | fzf) | wl-copy
 ```
 
 Same with [Alacritty]:
 
 ``` sh
-alacritty --command sh -c 'password-get $(password-menu | fzf) | setsid wl-copy > /dev/null 2>&1'
+alacritty --command sh -c 'password get $(password menu | fzf) | setsid wl-copy > /dev/null 2>&1'
 ```
 
 ## Configuration
 
 ``` sh
 password_menu() {
-  password-get $(password-menu | fzf) | wl-copy
+  password get $(password menu | fzf) | wl-copy
 }
 
-alias pm=password_menu
-alias pc=password-create
-alias pg=password-get
-alias pe=password-edit
+alias pm='password_menu'
+alias pc='password create'
+alias pg='password get'
+alias pe='password edit'
 ```
 
 [Crystal]: https://crystal-lang.org

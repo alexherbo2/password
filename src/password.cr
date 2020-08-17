@@ -1,26 +1,55 @@
 require "crypto/bcrypt/password"
 require "yaml"
-require "./password/env"
-
-PASSWORDS_PATH = Path[ENV["XDG_CONFIG_HOME"], "passwords.yml"]
+require "./env"
 
 alias Passwords = Hash(String, String)
 
-def get_passwords_path
-  PASSWORDS_PATH
-end
+class Password
+  @passwords : Passwords
 
-def get_passwords
-  passwords = File.open(get_passwords_path) do |file|
-    Passwords.from_yaml(file)
+  def initialize(@path : Path)
+    @passwords = File.open(@path) do |file|
+      Passwords.from_yaml(file)
+    end
   end
-end
 
-def write_password(key)
-  passwords = get_passwords
-  master_password = passwords["master"]
-  password_method = [key, master_password].join(':')
-  password = Crypto::Bcrypt::Password.create(password_method).to_s
-  passwords[key] = password
-  File.write(get_passwords_path, passwords.to_yaml)
+  def master_password
+    get("master")
+  end
+
+  def get(key)
+    @passwords[key]
+  end
+
+  def set(key)
+    new_password = hash(key)
+    @passwords[key] = new_password
+  end
+
+  def all
+    @passwords
+  end
+
+  def keys
+    @passwords.keys
+  end
+
+  def edit
+    system(ENV["EDITOR"], { @path.to_s })
+  end
+
+  def create(key)
+    set(key)
+
+    save
+  end
+
+  def save
+    File.write(@path, @passwords.to_yaml)
+  end
+
+  def hash(key)
+    password_method = [key, master_password].join(':')
+    Crypto::Bcrypt::Password.create(password_method).to_s
+  end
 end
