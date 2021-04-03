@@ -2,8 +2,8 @@ build:
 	shards build --release
 
 install: build
-	mkdir -p ~/.local/bin
-	ln -sf "${PWD}/bin/password" ~/.local/bin
+	install -d ~/.local/bin
+	install bin/password ~/.local/bin
 
 uninstall:
 	rm -f ~/.local/bin/password
