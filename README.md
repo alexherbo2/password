@@ -79,20 +79,20 @@ password get user@github.com
 Copy a password with [fzf] and [wl-clipboard]:
 
 ``` sh
-password get $(password menu | fzf) | wl-copy
+password menu | fzf | xargs password get -- | wl-copy
 ```
 
 Same with [Alacritty]:
 
 ``` sh
-alacritty --command sh -c 'password get $(password menu | fzf) | setsid wl-copy > /dev/null 2>&1'
+alacritty --command sh -c 'password menu | fzf | xargs password get -- | setsid wl-copy'
 ```
 
 ## Configuration
 
 ``` sh
 password_menu() {
-  password get $(password menu | fzf) | wl-copy
+  password menu | fzf | xargs password get -- | wl-copy
 }
 
 alias pm='password_menu'
