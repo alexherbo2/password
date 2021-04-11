@@ -1,48 +1,29 @@
 # Password
 
-[![IRC](https://img.shields.io/badge/IRC-%23password-blue)](https://webchat.freenode.net/#password)
-
 <img src="https://github.com/FortAwesome/Font-Awesome/raw/master/svgs/solid/lock.svg" height="16" align="right">
 
 > “One password to rule them all.”
 
-Command-line program for managing passwords.
+A command-line program for managing passwords.
 
-## Method
+###### Method
 
 ``` crystal
-Crypto::Bcrypt::Password.create("<key>:<password>")
+Crypto::Bcrypt::Password.create("taupiqueur@kanto.io:your-master-password")
 ```
 
 Memorize only one password.
 Use a different password on all website.
 
-**Example**
-
-``` crystal
-Crypto::Bcrypt::Password.create("alexherbo2@github.com:very-strong-password")
-```
-
 See [`Crypto::Bcrypt::Password`] for a complete reference.
 
 [`Crypto::Bcrypt::Password`]: https://crystal-lang.org/api/Crypto/Bcrypt/Password.html
 
-## Implementation
-
-A simple POSIX shell function:
-
-``` sh
-create_password() {
-  key=$1
-  printf '%s:%s' "$key" "$PASSWORD" | shasum -a 512 | base64
-}
-
-PASSWORD=very-strong-password create_password alexherbo2@github.com
-```
-
 ## Dependencies
 
 - [Crystal]
+
+[Crystal]: https://crystal-lang.org
 
 ## Installation
 
@@ -67,32 +48,30 @@ master: your-master-password
 Create a password:
 
 ``` sh
-password create user@github.com
+password create taupiqueur@kanto.io
 ```
 
 Get a password:
 
 ``` sh
-password get user@github.com
+password get taupiqueur@kanto.io
 ```
 
-Copy a password with [fzf] and [wl-clipboard]:
+Copy a password with a dynamic menu program:
 
 ``` sh
-password menu | fzf | xargs password get -- | wl-copy
-```
-
-Same with [Alacritty]:
-
-``` sh
-alacritty --command sh -c 'password menu | fzf | xargs password get -- | setsid wl-copy'
+password menu | dmenu | xargs password get -- | wl-copy
 ```
 
 ## Configuration
 
+Bash example configuration:
+
+`~/.bashrc`
+
 ``` sh
 password_menu() {
-  password menu | fzf | xargs password get -- | wl-copy
+  password menu | dmenu | xargs password get -- | wl-copy
 }
 
 alias pm='password_menu'
@@ -101,7 +80,12 @@ alias pg='password get'
 alias pe='password edit'
 ```
 
-[Crystal]: https://crystal-lang.org
-[fzf]: https://github.com/junegunn/fzf
-[Alacritty]: https://github.com/alacritty/alacritty
-[wl-clipboard]: https://github.com/bugaevc/wl-clipboard
+[Sway] example configuration:
+
+`~/.config/sway/config`
+
+```
+bindsym $mod+p exec password menu | dmenu | xargs password get -- | wl-copy
+```
+
+[Sway]: https://swaywm.org
